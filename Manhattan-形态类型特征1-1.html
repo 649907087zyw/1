@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <!-- 这里是加载刚下好的echarts.js，注意路径 -->
+    <script src="echarts.js"></script>
+    <!-- 引入 roma 主题 -->
+    <script src="theme/paper.js"></script>
+</head>
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 1000px;height:600px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'),'paper');
+
+        var colors = ['#fcd357', '#646464', '#b2caca', '#d2d2d2', '#dd6b66'];          // 0=黄，1=深灰,2=浅蓝,3=浅灰,4=淡粉
+        var option = {
+    tooltip : {
+        trigger: 'axis',
+        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+            type : 'cross'        // 默认为直线，可选为：'line' | 'shadow'| 'cross'
+        }
+    },
+    toolbox: {
+
+　　    show: true,
+
+　　        feature: {
+
+　　　        　saveAsImage: {
+
+　　　        　show:true,
+
+　　　        　excludeComponents :['toolbox'],
+
+　　　　        pixelRatio: 9        // 分辨率
+
+　　　　        }
+
+　　        }
+
+    },                            // 保存图片
+legend: {
+        data:['低','较低','较高','高']
+    },
+    grid: {
+        left: '20%',
+        right: '20%',
+        bottom: '0%',
+        top: '4%',
+        containLabel: true
+    },
+    xAxis : [
+        {
+            type : 'value',
+            name : '数量',
+            min: 0,
+            max: 11,
+            position: 'left',
+            splitLine: {show: false
+            }                   //去除网格线
+        },
+        {
+            type: 'value',
+            name: '百分数',
+            min: 0,
+            max: 100,
+            position: 'right',
+            splitLine: {
+                lineStyle: {
+                    type: 'dashed'
+                }
+            }  
+            
+        }
+    ],
+    yAxis : [
+        {
+            type : 'category',
+            data : ['LEN','W','PER','TA','BN','LWR','APR','NF','GFA','BA','FAR','BD','OSR','QR'],
+            axisLabel :{  
+               interval:0,  
+               rotate:0  
+            },
+            splitLine: {
+                show: true,
+                lineStyle: {
+                    type: 'dashed'
+                }
+            }  
+        }
+    ],
+    series : [
+        {
+            name:'低',
+            type:'bar',
+            barWidth : 8,
+            data:[6, 5, 6, 6, 10, 6, 0, 2, 7, 8, 2, 0, 4, 6],  
+                itemStyle:{  
+                     normal:{  
+                       color: colors[1]
+                       }  
+                }  
+                 
+        },
+        {
+            name:'较低',
+            type:'bar',
+            barWidth : 8,
+            data:[5, 3, 5, 5, 1, 5, 8, 2, 4, 3, 3, 1, 6, 3],itemStyle:{  
+                     normal:{  
+                       color: colors[3]
+                       }  
+                }
+        },
+        {
+            name:'较高',
+            type:'bar',
+            barWidth : 8,
+            data:[0, 1, 0, 0, 0, 0, 3, 7, 0, 0, 6, 6, 1, 2],itemStyle:{  
+                     normal:{  
+                       color: colors[2]
+                       }  
+                }
+        },
+        {
+            name:'高',
+            type:'bar',
+            barWidth : 8,
+            data:[0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0],itemStyle:{  
+                     normal:{  
+                       color: colors[0]
+                       }  
+                }
+        }
+    ]
+};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+
+    </script>
+</body>
+</html>
